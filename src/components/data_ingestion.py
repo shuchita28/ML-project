@@ -1,16 +1,22 @@
 import os
 import sys
-#from src.exception import CustomException
-#from src.logger import logging
+sys.path.insert(0, '/Users/shuchitamishra/Desktop/Jobs/Study /ML-project/src')
+from exception import CustomException
+from logger import logging
+from components.data_transformation import DataTransformation, DataTransformationConfig
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
 @dataclass
 class DataIngestionConfig:
-    train_data_path: str = os.path.join('/Users/shuchitamishra/Desktop/Jobs/Study /ML-project/artifact', 'train.csv') 
-    test_data_path: str = os.path.join('/Users/shuchitamishra/Desktop/Jobs/Study /ML-project/artifact', 'test.csv') 
-    raw_data_path: str = os.path.join('/Users/shuchitamishra/Desktop/Jobs/Study /ML-project/artifact', 'data.csv') 
+    path = os.getcwd()
+    print(path)
+    train_data_path: str = os.path.join(path,'artifact', "train.csv") 
+    print("taking test path")
+    test_data_path: str = os.path.join(path,'artifact', "test.csv") 
+    print("taking raw path")
+    raw_data_path: str = os.path.join(path,'artifact', "data.csv") 
 
 class DataIngestion:
     def __init__(self):
@@ -19,7 +25,8 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         #logging.info("Enter the data ingestion method/component")
         #try:
-        df = pd.read_csv('notebook/data/demographic.csv')
+        print("reading data")
+        df = pd.read_csv('notebook/data/final_data.csv')
         #logging.info("Data read into dataframe")
         print(self.ingestion_config.train_data_path)
 
@@ -35,7 +42,12 @@ class DataIngestion:
         return(self.ingestion_config.train_data_path, self.ingestion_config.test_data_path)
         #except Exception as e:
         #    raise CustomException(e, sys)
-        
-if __name__ == "main":
+
+if __name__=="__main__":
+    print("calling method")
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    print("calling method")
+    train_data, test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    data_transformation.intiate_dataTransformation(train_data, test_data)
