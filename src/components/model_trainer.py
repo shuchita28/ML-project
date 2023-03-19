@@ -1,6 +1,7 @@
 import os
 import sys
 from dataclasses import dataclass
+sys.path.insert(0, '/Users/shuchitamishra/Desktop/Jobs/Study /ML-project/src')
 from src.utils import save_object
 from src.exception import CustomException
 from src.logger import logging

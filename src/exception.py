@@ -1,4 +1,5 @@
 import sys
+sys.path.insert(0, '/Users/shuchitamishra/Desktop/Jobs/Study /ML-project/src')
 import logging
 
 def error_message_detail(error, error_detail:sys):
